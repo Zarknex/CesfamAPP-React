@@ -1,15 +1,39 @@
+/*--------------------------------------------------------------
+# Layout
+--------------------------------------------------------------*/
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar-brand {
+  color: #2c4964;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 27px !important;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  padding: 35px 5px;
+  /*background-color: pink*/
+}
+
+.footer {
+  padding: 37px 5px;
+  margin-top: auto;
+  /*background-color: pink;*/
+}
+
 a:hover {
   color: #2c4964;
 }
 
-.logo {
-  color: #2c4964;
-  font-size: 30px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  font-family: "Poppins", sans-serif;
-}
+
 
 .welcome {
   color:#1f3041;
@@ -42,7 +66,7 @@ a:hover {
   margin: 10px 0 0 0;
   font-size: 24px;
 }
-#hero .btn-get-started {
+.btn-get-started {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
@@ -51,13 +75,13 @@ a:hover {
   display: inline-block;
   padding: 12px 35px;
   margin-top: 30px;
-  border-radius: 50px;
+  border-radius: 10px;
   transition: 0.5s;
   color: #fff;
-  background: #1977cc;
+  background: #1266f1;
 }
-#hero .btn-get-started:hover {
-  background: #3291e6;
+.btn-get-started:hover {
+  background: #1266f1;
 }
 @media (min-width: 1024px) {
   #hero {
@@ -94,12 +118,10 @@ a:hover {
 #footer {
   font-size: 14px;
   background: #f1f7fd;
-  padding: 0px 0 15px 0;
 }
 
 #footer .credits {
-  padding-top: 5px;
-  font-size: 13px;
+  font-size: 12px;
   color: #444444;
 }
 
@@ -116,4 +138,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 

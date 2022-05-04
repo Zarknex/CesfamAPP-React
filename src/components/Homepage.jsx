@@ -6,7 +6,7 @@ function Homepage() {
       <div class="container">
         <h1>Bienvenido a CESFAM</h1>
         <h2>Para acceder al contenido debes iniciar sesión.</h2>
-        <a href="/" class="btn-get-started scrollto">
+        <a href="/login" class="btn-get-started scrollto">
           Iniciar sesión
         </a>
       </div>

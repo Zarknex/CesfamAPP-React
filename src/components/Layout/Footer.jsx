@@ -1,7 +1,7 @@
 function Footer() {
   return (
-    <footer id="footer" class="fixed-bottom">
-      <div class="container d-md-flex py-4">
+    <footer id="footer" class="fixed-bottom shadowm">
+      <div class="container d-md-flex py-3">
         <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
             &copy; Copyright{" "}

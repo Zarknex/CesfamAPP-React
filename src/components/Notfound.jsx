@@ -1,7 +1,9 @@
-import React from 'react'
-
-export const Notfound = () => {
+function Notfound() {
   return (
-    <div class="py-5">Notfound</div>
-  )
+    <div>
+      <h1>NotFound</h1>
+    </div>
+  );
 }
+
+export default Notfound;
