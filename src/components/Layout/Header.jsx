@@ -1,9 +1,9 @@
 function Header() {
   return (
-      <nav class="navbar navbar-expand-lg bg-white shadow-2 fixed-top">
-        <div class="container-fluid">
-          <div class="d-flex">
-            <a class="navbar-brand ms-3" href="/">
+      <nav className="navbar navbar-expand-lg bg-white shadow-2 fixed-top">
+        <div className="container-fluid">
+          <div className="d-flex">
+            <a className="navbar-brand ms-3" href="/">
               CESFAM
             </a>
           </div>

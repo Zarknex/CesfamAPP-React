@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import Homepage from './components/Homepage';
 import Notfound from './components/Notfound';
@@ -10,14 +11,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function BasicLayout() {
   return (
     <>
-    <div class="app">
-      <div class="header">
+    <div className="app">
+      <div className="header">
         <Header />
       </div>
-      <div class="app-content">
+      <div className="app-content">
         <Outlet />
       </div>
-      <div class="footer">
+      <div className="footer">
         <Footer />
       </div>
     </div>
@@ -26,8 +27,10 @@ function BasicLayout() {
 }
 
 
-
 function App() {
+
+  const [users, setUsers] = useState({});
+
   return (
   <BrowserRouter>
     <Routes>
@@ -35,7 +38,9 @@ function App() {
         <Route index element={<Homepage/>}/>
       </Route>
       <Route path='/login' element={<BasicLayout/>}>
-        <Route index element={<Login/>}/>
+        <Route index element={<Login
+          setUsers={setUsers}
+        />}/>
       </Route>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
@@ -43,7 +48,3 @@ function App() {
   );
 }
 export default App;
-
-//<Header/>
-//<Homepage/>
-//<Footer/>
