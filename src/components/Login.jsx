@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import Alert from "./Alert";
 
 function Login({ setUsers }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [alert, setAlert] = useState({});
 
   const [error, setError] = useState(false);
 
@@ -10,17 +12,22 @@ function Login({ setUsers }) {
     e.preventDefault();
 
     if ([user, pass].includes("")) {
-      setError(true);
+      setAlert({
+        msg: "Existen algunos campos vacios. ",
+        error: true,
+      });
       return;
     }
     setError(false);
 
     const users = {
       user,
-      pass
-    }
+      pass,
+    };
     setUsers(users);
   };
+
+  const { msg } = alert 
 
   return (
     <section className="vh-100">
@@ -40,7 +47,7 @@ function Login({ setUsers }) {
 
           <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
             <form onSubmit={handleSubmit}>
-              {error && "Campos vacios"}
+              { msg && <Alert alert={alert}/> }
               <div className="mb-4">
                 <label className="form-label">Usuario</label>
                 <input
