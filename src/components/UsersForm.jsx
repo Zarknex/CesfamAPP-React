@@ -44,7 +44,8 @@ const UsersForm = () => {
       });
       return
     }
-    submitUser({username, password, name, lastName, email, phone, typeUser});
+    submitUser({id, username, password, name, lastName, email, phone, typeUser});
+    setId(null)
     setUsername("")
     setPassword("")
     setName("")

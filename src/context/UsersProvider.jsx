@@ -41,6 +41,32 @@ const UsersProvider = ({ children }) => {
   };
 
   const submitUser = async (user) => {
+    if (user.id) {
+      editUser(user);
+    } else {
+      newUser(user);
+    }
+  };
+
+  const editUser = async (user) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axiosClient.put(`/users/${user.id}`, user, config);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const newUser = async (user) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -69,7 +95,7 @@ const UsersProvider = ({ children }) => {
         error: true,
       });
     }
-  };
+  }
 
   const getUser = async (id) => {
     setLoading(true)

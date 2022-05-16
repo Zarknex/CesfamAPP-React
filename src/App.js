@@ -5,7 +5,7 @@ import Footer from "./components/Layout/Footer";
 import ProtectedRoute from "./components/Layout/ProtectedRoute";
 
 import Homepage from "./components/Homepage";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/Notfound";
 import Login from "./components/Login";
 import Users from "./components/Users";
 import NewUser from "./components/NewUser";
