@@ -1,8 +1,8 @@
 function Footer() {
   return (
-    <footer id="footer" className="fixed-bottom shadowm">
-      <div className="container d-md-flex py-3">
-        <div className="me-md-auto text-center text-md-start">
+    <footer id="footer" className="absolute inset-x-0 bottom-0 shadow-sm">
+      <div className="px-3 py-3">
+        <div className=" text-left">
           <div className="copyright">
             &copy; Copyright{" "}
             <strong>

@@ -48,14 +48,14 @@ function Login() {
   const { msg } = alert;
   return (
     <>
-      <section className="vh-100">
-        <div className="d-flex justify-content-center">
+      <section>
+        <div className="flex justify-content-center">
           <h2 className="title">Bienvenido al portal CESFAM</h2>
         </div>
 
-        <div className="container py-3">
-          <div className="row d-flex align-items-center justify-content-center h-100">
-            <div className="col-md-8 col-lg-7 col-xl-6">
+        <div className="container py-3 ">
+          <div className="grid grid-cols-2 gap-3 align-items-center">
+            <div className="col-span-1">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                 className="img-fluid"
@@ -63,25 +63,25 @@ function Login() {
               />
             </div>
 
-            <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div className="col-span-1 ">
               {msg && <Alert alert={alert} />}
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label className="form-label">Usuario</label>
+              <form onSubmit={handleSubmit} className="">
+                <div className="mb-3">
+                  <label className="text-gray-700 uppercase font-bold text-sm">Usuario</label>
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className="border-1 w-full p-2 mt-2 placeholder-gray-800 rounded-md"
                     placeholder="Introduce tu nombre de usuario"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
 
-                <div className="mb-4">
-                  <label className="form-label">Contraseña</label>
+                <div className="mb-3">
+                  <label className="text-gray-700 uppercase font-bold text-sm">Contraseña</label>
                   <input
                     type="password"
-                    className="form-control form-control-lg"
+                    className="border-1 w-full p-2 mt-2 placeholder-gray-800 rounded-md"
                     placeholder="Introduce tu contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

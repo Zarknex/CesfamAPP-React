@@ -21,7 +21,7 @@ const UsersForm = () => {
     if (params.id) {
       setId(user._id)
       setUsername(user.username)
-      setPassword(user.password)
+      setPassword("")
     setName(user.name)
     setLastName(user.lastName)
     setEmail(user.email)
@@ -170,6 +170,7 @@ const UsersForm = () => {
           value={typeUser}
           onChange={(e) => setTypeUser(e.target.value)}
         >
+          <option value="">--Seleccionar--</option>
           <option value="patient">Paciente</option>
           <option value="doctor">Doctor</option>
           <option value="farm">Farmaceutico</option>
