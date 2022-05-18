@@ -16,7 +16,7 @@ const ModalFormPrescription = () => {
     user
   } = useUsers();
 
-  console.log(user);
+  //console.log(user);
 
   const [patientName] = useState(user.name);
   const [patientLastName] = useState(user.lastName)

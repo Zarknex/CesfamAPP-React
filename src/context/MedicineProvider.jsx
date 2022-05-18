@@ -4,15 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const MedicinesContext = createContext();
 
-const MedicinesProvider = ({children}) => {
+const MedicinesProvider = ({ children }) => {
+  const [medicines, setMedicines] = useState([]);
+  const [alert, setAlert] = useState({});
+  const [medicine, setMedicine] = useState({});
+  const [loading, setLoading] = useState(false);
 
-const [medicines, setMedicines] = useState([]);
-const [alert, setAlert] = useState({});
-const [medicine, setMedicine] = useState({});
-const [loading, setLoading] = useState(false);
-
-const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getMedicines = async () => {
@@ -27,14 +25,14 @@ const navigate = useNavigate();
           },
         };
 
-        const { data } = await axiosClient("/medicines/list", config);
+        const { data } = await axiosClient("/medicines", config);
         setMedicines(data);
       } catch (error) {
         console.log(error);
       }
     };
     getMedicines();
-  },[]);
+  }, []);
 
   const showAlert = (alert) => {
     setAlert(alert);
@@ -50,7 +48,7 @@ const navigate = useNavigate();
       await newMedicine(medicine);
     }
   };
-  
+
   const editMedicine = async (medicine) => {
     try {
       const token = localStorage.getItem("token");
@@ -63,9 +61,15 @@ const navigate = useNavigate();
         },
       };
 
-      const { data } = await axiosClient.put(`/medicines/${medicine.id}`, medicine, config);
+      const { data } = await axiosClient.put(
+        `/medicines/${medicine.id}`,
+        medicine,
+        config
+      );
       //Sincronizar state
-      const updatedMedicines = medicines.map(medicineState => medicineState._id === data._id ? data : medicineState);
+      const updatedMedicines = medicines.map((medicineState) =>
+        medicineState._id === data._id ? data : medicineState
+      );
       setMedicines(updatedMedicines);
       //Alerta
       setAlert({
@@ -77,11 +81,10 @@ const navigate = useNavigate();
         setAlert({});
         navigate("/crm");
       }, 3000);
-
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const newMedicine = async (medicine) => {
     try {
@@ -106,14 +109,17 @@ const navigate = useNavigate();
         setAlert({});
         navigate("/crm");
       }, 3000);
-      
     } catch (error) {
       console.log(error);
+      setAlert({
+        msg: error.response.data.msg,
+        error: true,
+      });
     }
-  }
+  };
 
   const getMedicine = async (id) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -146,13 +152,15 @@ const navigate = useNavigate();
       };
       const { data } = await axiosClient.delete(`/medicines/${id}`, config);
 
-      const updatedMedicine = medicines.filter(medicineState => medicineState._id !== id);
+      const updatedMedicine = medicines.filter(
+        (medicineState) => medicineState._id !== id
+      );
       setMedicines(updatedMedicine);
 
       setAlert({
         msg: data.msg,
-        error: false
-      })
+        error: false,
+      });
 
       setTimeout(() => {
         setAlert({});
@@ -161,22 +169,26 @@ const navigate = useNavigate();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <MedicinesContext.Provider
       value={{
+        medicines,
         showAlert,
+        alert,
         submitMedicine,
         getMedicine,
-        deleteMedicine
+        medicine,
+        loading,
+        deleteMedicine,
       }}
     >
       {children}
     </MedicinesContext.Provider>
-  )
-}
+  );
+};
 
-export {MedicinesProvider}
+export { MedicinesProvider };
 
 export default MedicinesContext;

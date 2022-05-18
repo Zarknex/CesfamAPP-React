@@ -8,7 +8,7 @@ const User = () => {
   const params = useParams();
   const { getUser, user, loading, handleModalPrescription } = useUsers();
   const admin = useAdmin()
-  console.log(admin);
+  //console.log(admin);
 
   const { name } = user;
   useEffect(() => {

@@ -41,8 +41,6 @@ const UsersProvider = ({ children }) => {
     }, 5000);
   };
 
-  
-
   const submitUser = async (user) => {
     if (user.id) {
       await editUser(user);
@@ -63,9 +61,11 @@ const UsersProvider = ({ children }) => {
         },
       };
       const { data } = await axiosClient.put(`/users/${user.id}`, user, config);
-      
+
       //Sincronizar state
-      const updatedUsers = users.map(userState => userState._id === data._id ? data : userState);
+      const updatedUsers = users.map((userState) =>
+        userState._id === data._id ? data : userState
+      );
       setUsers(updatedUsers);
       //Alert
       setAlert({
@@ -77,11 +77,10 @@ const UsersProvider = ({ children }) => {
         setAlert({});
         navigate("/crm");
       }, 3000);
-      
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const newUser = async (user) => {
     try {
@@ -112,10 +111,10 @@ const UsersProvider = ({ children }) => {
         error: true,
       });
     }
-  }
+  };
 
   const getUser = async (id) => {
-    setLoading(true)
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -148,13 +147,13 @@ const UsersProvider = ({ children }) => {
       };
       const { data } = await axiosClient.delete(`/users/${id}`, config);
 
-      const updatedUser = users.filter(userState => userState._id !== id);
+      const updatedUser = users.filter((userState) => userState._id !== id);
       setUsers(updatedUser);
 
       setAlert({
         msg: data.msg,
-        error: false
-      })
+        error: false,
+      });
 
       setTimeout(() => {
         setAlert({});
@@ -163,30 +162,34 @@ const UsersProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const handleModalPrescription = () => {
-    setModalFormPrescription(!modalFormPrescription)
-  }
+    setModalFormPrescription(!modalFormPrescription);
+  };
 
-  const submitPrescription = async prescription => {
+  const submitPrescription = async (prescription) => {
     try {
       const token = localStorage.getItem("token");
-        if (!token) return;
+      if (!token) return;
 
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
-        const { data } = await axiosClient.post("/prescriptions",prescription, config);
-        console.log(data);
+      const { data } = await axiosClient.post(
+        "/prescriptions",
+        prescription,
+        config
+      );
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <UsersContext.Provider
@@ -201,7 +204,7 @@ const UsersProvider = ({ children }) => {
         deleteUser,
         modalFormPrescription,
         handleModalPrescription,
-        submitPrescription
+        submitPrescription,
       }}
     >
       {children}

@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
 const HeaderCrm = () => {
+
+  const logout = () => {
+    localStorage.clear("")
+    window.location.reload();
+  } 
   return (
     <header className="px-4 py-5 bg-white border-b">
       <div className="md:flex md:justify-between">
@@ -11,8 +16,9 @@ const HeaderCrm = () => {
 
         <div className="flex items-center gap-4">
           <Link to="/crm" className="font-bold uppercase no-underline text-black">Usuarios</Link>
-          <Link to="/medicines" className="font-bold uppercase no-underline text-black">Medicamentos</Link>
+          <Link to="/crm/medicines" className="font-bold uppercase no-underline text-black">Medicamentos</Link>
           <button type="button"
+          onClick={logout}
           className="text-white text-sm bg-sky-600 p-3 rounded-md uppercase font-bold">Cerrar sesión</button>
         </div>
       </div>

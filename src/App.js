@@ -12,11 +12,13 @@ import NewUser from "./components/NewUser";
 import User from "./components/User";
 import EditUser from "./components/EditUser";
 import NewMedicine from "./components/NewMedicine";
+import Medicines from "./components/Medicines";
 
 import { Outlet } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider";
 import { UsersProvider } from "./context/UsersProvider";
+import { MedicinesProvider } from "./context/MedicineProvider";
 
 function BasicLayout() {
   return (
@@ -39,26 +41,31 @@ function BasicLayout() {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <UsersProvider>
-          <Routes>
-            <Route path="/" element={<BasicLayout />}>
-              <Route index element={<Homepage />} />
-              <Route path="/login" element={<Login />} />
-            </Route>
+      
+        <AuthProvider>
+          <UsersProvider>
+          <MedicinesProvider>
+            <Routes>
+              <Route path="/" element={<BasicLayout />}>
+                <Route index element={<Homepage />} />
+                <Route path="/login" element={<Login />} />
+              </Route>
 
-            <Route path="/CRM" element={<ProtectedRoute />}>
-              <Route index element={<Users />} />
-              <Route path="new-user" element={<NewUser />}></Route>
-              <Route path="new-medicine" element={<NewMedicine/>}></Route>
-              <Route path=":id" element={<User />}></Route>
-              <Route path="edit/:id" element={<EditUser />}></Route>
-            </Route>
+              <Route path="/CRM" element={<ProtectedRoute />}>
+                <Route index element={<Users />} />
+                <Route path="medicines" element={<Medicines />} />
+                <Route path="new-user" element={<NewUser />}></Route>
+                <Route path="new-medicine" element={<NewMedicine />}></Route>
+                <Route path=":id" element={<User />}></Route>
+                <Route path="edit/:id" element={<EditUser />}></Route>
+              </Route>
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </UsersProvider>
-      </AuthProvider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            </MedicinesProvider>
+          </UsersProvider>
+        </AuthProvider>
+      
     </BrowserRouter>
   );
 }
