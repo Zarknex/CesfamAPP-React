@@ -5,12 +5,13 @@ import Footer from "./components/Layout/Footer";
 import ProtectedRoute from "./components/Layout/ProtectedRoute";
 
 import Homepage from "./components/Homepage";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/Notfound";
 import Login from "./components/Login";
 import Users from "./components/Users";
 import NewUser from "./components/NewUser";
 import User from "./components/User";
 import EditUser from "./components/EditUser";
+import NewMedicine from "./components/NewMedicine";
 
 import { Outlet } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -48,7 +49,8 @@ function App() {
 
             <Route path="/CRM" element={<ProtectedRoute />}>
               <Route index element={<Users />} />
-              <Route path="create-user" element={<NewUser />}></Route>
+              <Route path="new-user" element={<NewUser />}></Route>
+              <Route path="new-medicine" element={<NewMedicine/>}></Route>
               <Route path=":id" element={<User />}></Route>
               <Route path="edit/:id" element={<EditUser />}></Route>
             </Route>

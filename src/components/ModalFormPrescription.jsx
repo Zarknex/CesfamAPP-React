@@ -6,24 +6,30 @@ import { useParams } from "react-router-dom";
 const SEX = ["Masculino", "Femenino"];
 
 const ModalFormPrescription = () => {
-  const [patientName, setPatientName] = useState("");
-  const [patientLastName, setPatientLastName] = useState("");
-  const [agePatient, setAgePatient] = useState("");
-  const [sexPatient, setSexPatient] = useState("");
-  const [rutPatient, setRutPatient] = useState("");
-  const [diagnosticPatient, setDiagnosticPatient] = useState("");
-  const [idMedicinePatient, setIdMedicinePatient] = useState("");
-  const [dosePatient, setDosePatient] = useState("");
-
-  const params = useParams();
-
+  
   const {
     modalFormPrescription,
     handleModalPrescription,
     showAlert,
     alert,
     submitPrescription,
+    user
   } = useUsers();
+
+  console.log(user);
+
+  const [patientName] = useState(user.name);
+  const [patientLastName] = useState(user.lastName)
+  const [agePatient, setAgePatient] = useState("");
+  const [sexPatient, setSexPatient] = useState("");
+  const [rutPatient] = useState(user.username);
+  const [diagnosticPatient, setDiagnosticPatient] = useState("");
+  const [idMedicinePatient, setIdMedicinePatient] = useState("");
+  const [dosePatient, setDosePatient] = useState("");
+
+  const params = useParams();
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -141,8 +147,8 @@ const ModalFormPrescription = () => {
                         id="patientName"
                         placeholder="Nombre del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={patientName}
-                        onChange={(e) => setPatientName(e.target.value)}
+                        value={user.name}
+                        //onChange={(e) => setPatientName(e.target.value)}
                       ></input>
                     </div>
                     <div className="mb-3">
@@ -157,8 +163,8 @@ const ModalFormPrescription = () => {
                         id="patientLastName"
                         placeholder="Apellido del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={patientLastName}
-                        onChange={(e) => setPatientLastName(e.target.value)}
+                        value={user.lastName}
+                        //onChange={(e) => setPatientLastName(e.target.value)}
                       ></input>
                     </div>
                     <div className="mb-3">
@@ -208,8 +214,8 @@ const ModalFormPrescription = () => {
                         id="rutPatient"
                         placeholder="RUT del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={rutPatient}
-                        onChange={(e) => setRutPatient(e.target.value)}
+                        value={user.username}
+                        //onChange={(e) => setRutPatient(e.target.value)}
                       ></input>
                     </div>
                     <div className="mb-3">

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import useUsers from "../hooks/useUsers";
+import useAdmin from "../hooks/useAdmin";
 import ModalFormPrescription from "./ModalFormPrescription";
 
 const User = () => {
   const params = useParams();
   const { getUser, user, loading, handleModalPrescription } = useUsers();
+  const admin = useAdmin()
+  console.log(admin);
 
   const { name } = user;
   useEffect(() => {
