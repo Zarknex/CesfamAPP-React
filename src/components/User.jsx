@@ -6,9 +6,13 @@ import ModalFormPrescription from "./ModalFormPrescription";
 
 const User = () => {
   const params = useParams();
-  const { getUser, user, loading, handleModalPrescription } = useUsers();
+  const { getUser, user, loading, handleModalPrescription } = useUsers([]);
   const admin = useAdmin()
-  //console.log(admin);
+
+  console.log(user.prescriptions);
+  console.log(user.prescriptions.lenght)
+  
+  
 
   const { name } = user;
   useEffect(() => {
@@ -59,6 +63,9 @@ const User = () => {
         </svg>
         Agregar prescripción
       </button>
+
+      <p>Prescripciones del paciente</p>
+      <div>{user.prescriptions?.lenght ? 'Si hay prescripciones' : 'No hay prescripciones'}</div>
 
       <ModalFormPrescription/>
     </>

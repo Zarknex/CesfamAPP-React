@@ -10,7 +10,7 @@ function Footer() {
             </strong>
             . All Rights Reserved
           </div>
-          <div className="credits">Diseñado por LosMáVio</div>
+          <div className="credits">Diseñado por ArrayMembers</div>
         </div>
       </div>
     </footer>

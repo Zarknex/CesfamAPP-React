@@ -1,25 +1,38 @@
 import { Fragment, useState, useEffect } from "react";
+import Select from "react-select";
 import { Dialog, Transition } from "@headlessui/react";
 import useUsers from "../hooks/useUsers";
+import useMedicines from "../hooks/useMedicines";
 import Alert from "./Alert";
 import { useParams } from "react-router-dom";
 const SEX = ["Masculino", "Femenino"];
 
 const ModalFormPrescription = () => {
   
+  const {medicines} = useMedicines();
+
+  const arrayMedicine = medicines.map(
+    ({ _id, description }) => ({
+      value: _id,
+      label: description,
+    })
+  );
+
+  const selectedOpt = (value) => {
+    setIdMedicinePatient(value)
+  }
+
   const {
     modalFormPrescription,
     handleModalPrescription,
     showAlert,
     alert,
     submitPrescription,
-    user
+    user,
   } = useUsers();
 
-  //console.log(user);
-
   const [patientName] = useState(user.name);
-  const [patientLastName] = useState(user.lastName)
+  const [patientLastName] = useState(user.lastName);
   const [agePatient, setAgePatient] = useState("");
   const [sexPatient, setSexPatient] = useState("");
   const [rutPatient] = useState(user.username);
@@ -29,7 +42,6 @@ const ModalFormPrescription = () => {
 
   const params = useParams();
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -60,6 +72,7 @@ const ModalFormPrescription = () => {
       diagnosticPatient,
       idMedicinePatient,
       dosePatient,
+      patientId: params.id
     });
   };
 
@@ -148,6 +161,7 @@ const ModalFormPrescription = () => {
                         placeholder="Nombre del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={user.name}
+                        readOnly
                         //onChange={(e) => setPatientName(e.target.value)}
                       ></input>
                     </div>
@@ -164,6 +178,7 @@ const ModalFormPrescription = () => {
                         placeholder="Apellido del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={user.lastName}
+                        readOnly
                         //onChange={(e) => setPatientLastName(e.target.value)}
                       ></input>
                     </div>
@@ -215,6 +230,7 @@ const ModalFormPrescription = () => {
                         placeholder="RUT del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={user.username}
+                        readOnly
                         //onChange={(e) => setRutPatient(e.target.value)}
                       ></input>
                     </div>
@@ -240,14 +256,15 @@ const ModalFormPrescription = () => {
                       >
                         Medicinas paciente
                       </label>
-                      <input
-                        type="text"
-                        id="idMedicinePatient"
-                        placeholder="Medicinas para el paciente"
-                        className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={idMedicinePatient}
-                        onChange={(e) => setIdMedicinePatient(e.target.value)}
-                      ></input>
+                      <Select
+                       value={idMedicinePatient}
+                        isMulti
+                        onChange={selectedOpt}
+                        name="colors"
+                        options={arrayMedicine}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                      />
                     </div>
                     <div className="mb-3">
                       <label
@@ -258,8 +275,8 @@ const ModalFormPrescription = () => {
                       </label>
                       <input
                         type="text"
-                        id="dosePatient"
-                        placeholder="Dosis para el paciente"
+                        id="rutPatient"
+                        placeholder="RUT del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={dosePatient}
                         onChange={(e) => setDosePatient(e.target.value)}
