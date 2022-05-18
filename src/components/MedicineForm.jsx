@@ -138,9 +138,9 @@ const MedicineForm = () => {
           onChange={(e) => setTypeMedicine(e.target.value)}
         >
           <option value="">--Seleccionar--</option>
-          <option value="patient">Pastillas</option>
-          <option value="doctor">Gotas</option>
-          <option value="farm">Inyectable</option>
+          <option value="pills">Pastillas</option>
+          <option value="drops">Gotas</option>
+          <option value="injectable">Inyectable</option>
         </select>
       </div>
 

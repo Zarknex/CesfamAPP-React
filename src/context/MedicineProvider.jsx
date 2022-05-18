@@ -107,7 +107,7 @@ const MedicinesProvider = ({ children }) => {
 
       setTimeout(() => {
         setAlert({});
-        navigate("/crm");
+        navigate("/crm/new-medicine");
       }, 3000);
     } catch (error) {
       console.log(error);
