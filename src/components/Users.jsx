@@ -9,7 +9,7 @@ const Users = () => {
       <div className="bg-white shadow rounded-lg">
         {users.length ? 
         (
-          users.map((user) => <PreviewUser key={user._id} user={user} />)
+          users.map((user) => <PreviewUser key={user} user={user} />)
         ) : 
         (
           <p className="text-center text-gray-600 uppercase font-bold m-0 p-3">

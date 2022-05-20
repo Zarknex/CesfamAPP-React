@@ -52,15 +52,15 @@ function App() {
               </Route>
 
               <Route path="/CRM" element={<ProtectedRoute />}>
-                <Route index element={<Users />} />
-                <Route path="medicines" element={<Medicines />} />
-                <Route path="new-user" element={<NewUser />}></Route>
+                <Route index element={<Users/>} />
+                <Route path="medicines" element={<Medicines/>} />
+                <Route path="new-user" element={<NewUser/>}></Route>
                 <Route path="new-medicine" element={<NewMedicine />}></Route>
-                <Route path=":id" element={<User />}></Route>
+                <Route path=":id" element={<User/>}></Route>
                 <Route path="edit/:id" element={<EditUser />}></Route>
               </Route>
 
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<NotFound/>} />
             </Routes>
             </MedicinesProvider>
           </UsersProvider>

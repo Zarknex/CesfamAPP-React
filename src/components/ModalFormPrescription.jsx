@@ -8,19 +8,16 @@ import { useParams } from "react-router-dom";
 const SEX = ["Masculino", "Femenino"];
 
 const ModalFormPrescription = () => {
-  
-  const {medicines} = useMedicines();
+  const { medicines } = useMedicines();
 
-  const arrayMedicine = medicines.map(
-    ({ _id, description }) => ({
-      value: _id,
-      label: description,
-    })
-  );
+  const arrayMedicine = medicines.map(({ _id, description }) => ({
+    value: _id,
+    label: description,
+  }));
 
   const selectedOpt = (value) => {
-    setIdMedicinePatient(value)
-  }
+    setIdMedicinePatient(value);
+  };
 
   const {
     modalFormPrescription,
@@ -29,20 +26,43 @@ const ModalFormPrescription = () => {
     alert,
     submitPrescription,
     user,
+    prescription,
   } = useUsers();
 
-  const [patientName] = useState(user.name);
-  const [patientLastName] = useState(user.lastName);
+  const [patientName, setPatientName] = useState(user.name);
+  const [patientLastName, setPatientLastName] = useState(user.lastName);
   const [agePatient, setAgePatient] = useState("");
   const [sexPatient, setSexPatient] = useState("");
-  const [rutPatient] = useState(user.username);
+  const [rutPatient, setRutPatient] = useState(user.username);
   const [diagnosticPatient, setDiagnosticPatient] = useState("");
   const [idMedicinePatient, setIdMedicinePatient] = useState("");
   const [dosePatient, setDosePatient] = useState("");
+  const [id, setId] = useState("");
 
   const params = useParams();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (prescription?._id) {
+      setPatientName(prescription.patientName);
+      setPatientLastName(prescription.lastName);
+      setRutPatient(prescription.rutPatient);
+      setId(prescription._id);
+      setAgePatient(prescription.agePatient);
+      setSexPatient(prescription.sexPatient);
+      setDiagnosticPatient(prescription.diagnosticPatient);
+      setIdMedicinePatient(prescription.idMedicinePatient);
+      setDosePatient(prescription.dosePatient);
+      return;
+    }
+    setId("");
+    setAgePatient("");
+    setSexPatient("");
+    setDiagnosticPatient("");
+    setIdMedicinePatient("");
+    setDosePatient("");
+  }, [prescription]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       [
@@ -63,7 +83,7 @@ const ModalFormPrescription = () => {
       return;
     }
 
-    submitPrescription({
+    await submitPrescription({
       patientName,
       patientLastName,
       agePatient,
@@ -72,8 +92,14 @@ const ModalFormPrescription = () => {
       diagnosticPatient,
       idMedicinePatient,
       dosePatient,
-      patientId: params.id
-    });
+      patientId: params.id,
+    }).then(
+      setAgePatient(""),
+      setSexPatient(""),
+      setDiagnosticPatient(""),
+      setIdMedicinePatient(""),
+      setDosePatient("")
+    );
   };
 
   const { msg } = alert;
@@ -115,7 +141,7 @@ const ModalFormPrescription = () => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
@@ -144,7 +170,7 @@ const ModalFormPrescription = () => {
                     as="h3"
                     className="text-lg leading-6 font-bold text-gray-900"
                   >
-                    Crear prescripción
+                    {id ? "Editar prescripción" : "Crear prescripción"}
                   </Dialog.Title>
                   {msg && <Alert alert={alert} />}
                   <form className="my-10" onSubmit={handleSubmit}>
@@ -160,7 +186,7 @@ const ModalFormPrescription = () => {
                         id="patientName"
                         placeholder="Nombre del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={user.name}
+                        value={patientName}
                         readOnly
                         //onChange={(e) => setPatientName(e.target.value)}
                       ></input>
@@ -177,7 +203,7 @@ const ModalFormPrescription = () => {
                         id="patientLastName"
                         placeholder="Apellido del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={user.lastName}
+                        value={patientLastName}
                         readOnly
                         //onChange={(e) => setPatientLastName(e.target.value)}
                       ></input>
@@ -229,7 +255,7 @@ const ModalFormPrescription = () => {
                         id="rutPatient"
                         placeholder="RUT del paciente"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={user.username}
+                        value={rutPatient}
                         readOnly
                         //onChange={(e) => setRutPatient(e.target.value)}
                       ></input>
@@ -257,7 +283,7 @@ const ModalFormPrescription = () => {
                         Medicinas paciente
                       </label>
                       <Select
-                       value={idMedicinePatient}
+                        value={idMedicinePatient}
                         isMulti
                         onChange={selectedOpt}
                         name="colors"
@@ -286,7 +312,7 @@ const ModalFormPrescription = () => {
                       type="submit"
                       className="bg-sky-600 hover:bg-sky-700 w-full
                     p-3 text-white font-bold cursor-pointer transition-colors rounded-md text-sm"
-                      value="Crear prescripción"
+                      value={id ? "Editar prescripción" : "Crear prescripción"}
                     ></input>
                   </form>
                 </div>

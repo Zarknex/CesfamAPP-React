@@ -1,16 +1,12 @@
 import { Link } from "react-router-dom";
-const PreviewMedicine = ({medicine}) => {
-  const {_id, description, stock, manufacturer, content, typeMedicine} = medicine;
-  
-  
+const PreviewMedicine = ({ medicine }) => {
+  const { _id, description, stock, manufacturer, content, typeMedicine } =
+    medicine;
   return (
     <div className="border-b p-3 flex">
       <p className="flex-1">
         {description}
-        <span className="text-sm text-gray-500 uppercase">
-          {" "}
-          {manufacturer}
-        </span>
+        <span className="text-sm text-gray-500 uppercase"> {manufacturer}</span>
       </p>
       <Link
         to={`${_id}`}
@@ -18,8 +14,8 @@ const PreviewMedicine = ({medicine}) => {
       >
         Ver Medicina
       </Link>
-      </div>
+    </div>
   );
-}
+};
 
 export default PreviewMedicine;
