@@ -3,16 +3,15 @@ import { useParams, Link } from "react-router-dom";
 import useUsers from "../hooks/useUsers";
 import useAdmin from "../hooks/useAdmin";
 import ModalFormPrescription from "./ModalFormPrescription";
+import Prescription from "./Prescription";
 
 const User = () => {
   const params = useParams();
   const { getUser, user, loading, handleModalPrescription } = useUsers([]);
-  const admin = useAdmin()
+  const admin = useAdmin();
 
   console.log(user.prescriptions);
-  console.log(user.prescriptions.lenght)
-  
-  
+  console.log(user.prescriptions?.lenght);
 
   const { name } = user;
   useEffect(() => {
@@ -65,9 +64,19 @@ const User = () => {
       </button>
 
       <p>Prescripciones del paciente</p>
-      <div>{user.prescriptions?.lenght ? 'Si hay prescripciones' : 'No hay prescripciones'}</div>
+      <div className="bg-white shadow mt-10 rounded-lg">
+        {user.prescriptions?.length ? (
+          user.prescriptions.map((prescription) => (
+            <Prescription key={prescription._id} prescription={prescription} />
+          ))
+        ) : (
+          <p className="text-center my-5 p-10">
+            No hay prescripciones registradas para este paciente
+          </p>
+        )}
+      </div>
 
-      <ModalFormPrescription/>
+      <ModalFormPrescription />
     </>
   );
 };
