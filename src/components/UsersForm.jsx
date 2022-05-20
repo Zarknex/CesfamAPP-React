@@ -153,7 +153,7 @@ const UsersForm = () => {
           id="phone"
           type="text"
           className="border-1 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          placeholder="912345678"
+          placeholder="+56912345678"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         ></input>

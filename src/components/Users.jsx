@@ -1,7 +1,8 @@
 import useUsers from "../hooks/useUsers";
 import PreviewUser from "./PreviewUser";
 const Users = () => {
-  const { users } = useUsers();
+  const { users, loading } = useUsers();
+  if (loading) return 'loading...'
 
 
 
@@ -16,6 +17,7 @@ const Users = () => {
           users.map((user) => <PreviewUser key={user} user={user} />)
         ) : 
         (
+          window.location.reload(),
           <p className="text-center text-gray-600 uppercase font-bold m-0 p-3">
             No hay usuarios registrados aún
           </p>

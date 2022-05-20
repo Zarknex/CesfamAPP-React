@@ -16,7 +16,6 @@ const UsersProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     const getUsers = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -56,7 +55,7 @@ const UsersProvider = ({ children }) => {
       }
     };
     getPrescriptions();
-    setLoading(false)
+    setLoading(false);
   }, [user]);
 
   const showAlert = (alert) => {
@@ -292,10 +291,11 @@ const UsersProvider = ({ children }) => {
         error: false,
       });
 
-      const updatedUser = {...user}
-      updatedUser.prescriptions = updatedUser.prescriptions.filter(prescriptionState =>
-        prescriptionState._id !== prescription._id)
-      setUser(updatedUser)
+      const updatedUser = { ...user };
+      updatedUser.prescriptions = updatedUser.prescriptions.filter(
+        (prescriptionState) => prescriptionState._id !== prescription._id
+      );
+      setUser(updatedUser);
       setModalDeletePrescription(false);
       setPrescription({});
     } catch (error) {
@@ -323,6 +323,37 @@ const UsersProvider = ({ children }) => {
     }
   };
 
+  const sendMail = async (id) => {
+    try {
+      getUser(id);
+
+      const payload = {
+        email: user.email,
+        //name: user.name
+      }
+
+      const {data} = await axiosClient.post("/users/mail",payload);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendWsp = async (id) => {
+    try {
+      getUser(id);
+
+      const payload = {
+        message: `Estimado ${user.name} Sus medicamentos estan listos para su retiro. \nPor favor no responda este mensaje ya que es automatizado.\n CESFAM`,
+        number: user.phone,
+      };
+      const { data } = await axiosClient.post("/", payload);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <UsersContext.Provider
       value={{
@@ -344,6 +375,8 @@ const UsersProvider = ({ children }) => {
         getPrescription,
         handleModalDeletePrescription,
         modalDeletePrescription,
+        sendMail,
+        sendWsp,
       }}
     >
       {children}

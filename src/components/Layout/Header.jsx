@@ -5,7 +5,7 @@ function Header() {
   return (
       <nav className="bg-white shadow-sm">
         <div className="container-fluid">
-          <div className="flex justify-center">
+          <div className="flex justify-start">
             <a className="navbar-brand px-3" href="/">
               <img src = {logo} alt="logo" height= {80} width={80}/>
               
