@@ -342,10 +342,11 @@ const UsersProvider = ({ children }) => {
   const sendWsp = async (id) => {
     try {
       getUser(id);
+      const userPhone = user.phone
 
       const payload = {
         message: `Estimado ${user.name} Sus medicamentos estan listos para su retiro. \nPor favor no responda este mensaje ya que es automatizado.\n CESFAM`,
-        number: user.phone,
+        number: userPhone,
       };
       const { data } = await axiosClient.post("/", payload);
       console.log(data);

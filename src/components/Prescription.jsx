@@ -17,7 +17,6 @@ const Prescription = ({ prescription }) => {
         </p>
         <p className="mb-1 text-xl text-gray-500">{rutPatient}</p>
         <p className="mb-1 text-xl">Edad: {agePatient} años</p>
-        <p className="mb-1 text-xl">Fecha entrega?: Date </p>
       </div>
       <div className="flex gap-2">
         <button
