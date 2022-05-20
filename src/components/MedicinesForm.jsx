@@ -2,21 +2,21 @@ import { useState, useEffect } from "react";
 import useMedicines from "../hooks/useMedicines";
 import Alert from "./Alert";
 import { useParams } from "react-router-dom";
-//description, stock, manufacturer, content, typeMedicine
-const MedicineForm = () => {
-  const [id, setId] = useState(null);
+
+const MedicinesForm = () => {
+  const [id, setId] = useState("");
   const [description, setDescription] = useState("");
   const [stock, setStock] = useState("");
   const [manufacturer, setManufacturer] = useState("");
   const [content, setContent] = useState("");
   const [typeMedicine, setTypeMedicine] = useState("");
-  const { alert, showAlert, loading, submitMedicine, medicine } = useMedicines([]);
+  const { alert, showAlert, submitMedicine, medicine } = useMedicines([]);
+
   const params = useParams();
-  useMedicines();
 
   useEffect(() => {
     if (params.id) {
-      setId(medicine.id);
+      setId(medicine._id);
       setDescription(medicine.description);
       setStock(medicine.stock);
       setManufacturer(medicine.manufacturer);
@@ -54,22 +54,23 @@ const MedicineForm = () => {
   };
 
   const { msg } = alert;
-  if (loading) return "Loading....";
+
+
   return (
     <form
       className="bg-white px-5 py-10 md:w-1/2 rounded-lg shadow"
       onSubmit={handleSubmit}
     >
-    {msg && <Alert alert={alert} />}
+      {msg && <Alert alert={alert} />}
       <div className="mb-3">
         <label
           className="text-gray-700 uppercase font-bold text-sm"
-          htmlFor="name"
+          htmlFor="stock"
         >
-          Nombre
+          Descripción de medicamento
         </label>
         <input
-          id="name"
+          id="description"
           type="text"
           className="border-1 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           placeholder="Descripción breve"
@@ -82,13 +83,13 @@ const MedicineForm = () => {
           className="text-gray-700 uppercase font-bold text-sm"
           htmlFor="stock"
         >
-          Stock
+          Stock disponible
         </label>
         <input
           id="stock"
           type="text"
           className="border-1 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          placeholder="100"
+          placeholder="999"
           value={stock}
           onChange={(e) => setStock(e.target.value)}
         ></input>
@@ -101,7 +102,7 @@ const MedicineForm = () => {
           Laboratorio
         </label>
         <input
-          id="manufacturer"
+          id="name"
           type="text"
           className="border-1 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           placeholder="Laboratorio"
@@ -120,7 +121,7 @@ const MedicineForm = () => {
           id="content"
           type="text"
           className="border-1 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          placeholder="Cantidad de dosis"
+          placeholder="Contenido de la caja"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         ></input>
@@ -128,7 +129,7 @@ const MedicineForm = () => {
       <div className="mb-3">
         <label
           className="text-gray-700 uppercase font-bold text-sm"
-          htmlFor="username"
+          htmlFor="typeMedicine"
         >
           Tipo de medicina
         </label>
@@ -143,14 +144,13 @@ const MedicineForm = () => {
           <option value="injectable">Inyectable</option>
         </select>
       </div>
-
       <input
         type="submit"
         className="bg-sky-600 w-full p-3 uppercase font-bold text-white rounded-xl cursor-pointer hover:bg-sky-700 transition-colors"
         value={id ? 'Editar medicamento':'Registrar medicamento'}
       ></input>
     </form>
-  );
+  )
 };
 
-export default MedicineForm;
+export default MedicinesForm;

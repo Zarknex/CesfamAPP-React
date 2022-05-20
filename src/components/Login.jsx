@@ -89,10 +89,9 @@ function Login() {
                 </div>
 
                 <div className="d-flex justify-content-around align-items-center mb-4">
-                  <a href="/password-reset">¿Olvidaste tu contraseña?</a>
                   <button
                     type="submit"
-                    className="btn btn-primary btn-lg btn-block"
+                    className="btn-get-started w-64 sm:w-30"
                   >
                     Iniciar sesión
                   </button>

@@ -44,7 +44,7 @@ const ModalFormPrescription = () => {
   useEffect(() => {
     if (prescription?._id) {
       setPatientName(prescription.patientName);
-      setPatientLastName(prescription.lastName);
+      setPatientLastName(prescription.patientLastName);
       setRutPatient(prescription.rutPatient);
       setId(prescription._id);
       setAgePatient(prescription.agePatient);
@@ -280,7 +280,7 @@ const ModalFormPrescription = () => {
                         className="text-gray-700 uppercase font-bold text-sm"
                         htmlFor="idMedicinePatient"
                       >
-                        Medicinas paciente
+                        Medicamentos paciente
                       </label>
                       <Select
                         value={idMedicinePatient}
@@ -302,7 +302,7 @@ const ModalFormPrescription = () => {
                       <input
                         type="text"
                         id="rutPatient"
-                        placeholder="RUT del paciente"
+                        placeholder="1 dosis cada 24/hrs por 2 semanas"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={dosePatient}
                         onChange={(e) => setDosePatient(e.target.value)}

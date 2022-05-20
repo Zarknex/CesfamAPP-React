@@ -19,6 +19,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider";
 import { UsersProvider } from "./context/UsersProvider";
 import { MedicinesProvider } from "./context/MedicineProvider";
+import EditMedicine from "./components/EditMedicine";
 
 function BasicLayout() {
   return (
@@ -41,9 +42,8 @@ function BasicLayout() {
 function App() {
   return (
     <BrowserRouter>
-      
-        <AuthProvider>
-          <UsersProvider>
+      <AuthProvider>
+        <UsersProvider>
           <MedicinesProvider>
             <Routes>
               <Route path="/" element={<BasicLayout />}>
@@ -52,20 +52,21 @@ function App() {
               </Route>
 
               <Route path="/CRM" element={<ProtectedRoute />}>
-                <Route index element={<Users/>} />
-                <Route path="medicines" element={<Medicines/>} />
-                <Route path="new-user" element={<NewUser/>}></Route>
+                <Route index element={<Users />} />
+                <Route path="medicines" element={<Medicines />} />
+                <Route path="medicines/:id" element={<EditMedicine />} />
+
+                <Route path="new-user" element={<NewUser />}></Route>
                 <Route path="new-medicine" element={<NewMedicine />}></Route>
-                <Route path=":id" element={<User/>}></Route>
+                <Route path=":id" element={<User />}></Route>
                 <Route path="edit/:id" element={<EditUser />}></Route>
               </Route>
 
-              <Route path="*" element={<NotFound/>} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
-            </MedicinesProvider>
-          </UsersProvider>
-        </AuthProvider>
-      
+          </MedicinesProvider>
+        </UsersProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

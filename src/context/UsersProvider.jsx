@@ -10,12 +10,13 @@ const UsersProvider = ({ children }) => {
   const [prescriptions, setPrescriptions] = useState([]);
   const [alert, setAlert] = useState({});
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [modalFormPrescription, setModalFormPrescription] = useState(false);
   const [modalDeletePrescription, setModalDeletePrescription] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    
     const getUsers = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -55,6 +56,7 @@ const UsersProvider = ({ children }) => {
       }
     };
     getPrescriptions();
+    setLoading(false)
   }, [user]);
 
   const showAlert = (alert) => {

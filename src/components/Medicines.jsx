@@ -5,7 +5,7 @@ const Medicines = () => {
   //console.log(medicines);
   return (
     <>
-      <h1 className="text-3xl font-black">Listado de medicinas</h1>
+      <h1 className="text-3xl font-black">Listado de medicamentos</h1>
       <div className="bg-white shadow rounded-lg">
         {medicines.length ? (
           medicines.map((medicine) => (

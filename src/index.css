@@ -126,6 +126,11 @@ a  {
 #footer {
   font-size: 14px;
   background: #f1f7fd;
+  position:absolute;
+left:0;
+bottom:0;
+right:0;
+
 }
 
 #footer .credits {

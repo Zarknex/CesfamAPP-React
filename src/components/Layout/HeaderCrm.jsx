@@ -12,7 +12,6 @@ const HeaderCrm = () => {
         <h2 className="text-4xl text-sky-600 font-black text-center">
           CESFAM CRM
         </h2>
-        <input type="search" placeholder="Buscar usuario" className="rounded-lg lg:w-80 block p-2 border"/>
 
         <div className="flex items-center gap-4">
           <Link to="/crm" className="font-bold uppercase no-underline text-black">Usuarios</Link>

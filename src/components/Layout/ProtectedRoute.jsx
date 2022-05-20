@@ -5,9 +5,9 @@ import HeaderCrm from "./HeaderCrm";
 import SidebarCrm from "./SidebarCrm";
 
 const ProtectedRoute = () => {
-  const { auth, loading } = useAuth();
+  const { auth } = useAuth();
+  
 
-  if (loading) return "Loading";
   return (
     <>
       {auth._id ? (

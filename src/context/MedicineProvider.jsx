@@ -101,7 +101,7 @@ const MedicinesProvider = ({ children }) => {
       setMedicines([...medicines, data]);
 
       setAlert({
-        msg: "Medicina registrada correctamente",
+        msg: "Medicamento registrada correctamente",
         error: false,
       });
 
