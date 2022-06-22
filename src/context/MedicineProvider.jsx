@@ -73,13 +73,13 @@ const MedicinesProvider = ({ children }) => {
       setMedicines(updatedMedicines);
       //Alerta
       setAlert({
-        msg: "Usuario actualizado correctamente",
+        msg: "Medicamento editado correctamente",
         error: false,
       });
       //Redireccionar
       setTimeout(() => {
         setAlert({});
-        navigate("/crm");
+        navigate("/crm/medicines");
       }, 3000);
     } catch (error) {
       console.log(error);
@@ -101,13 +101,13 @@ const MedicinesProvider = ({ children }) => {
       setMedicines([...medicines, data]);
 
       setAlert({
-        msg: "Medicamento registrada correctamente",
+        msg: "Medicamento registrado correctamente",
         error: false,
       });
 
       setTimeout(() => {
         setAlert({});
-        navigate("/crm/new-medicine");
+        navigate("/crm/medicines");
       }, 3000);
     } catch (error) {
       console.log(error);
